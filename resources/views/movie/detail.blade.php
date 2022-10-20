@@ -21,7 +21,9 @@
         <p class="card-text text-white">
             @foreach ($actors as $actor)
                 <img src="https://source.unsplash.com/100x200?person" class="img-fluid" alt="{{ $actor->name  }}">
-                {{ $actor->name }} sebagai {{ $actor->char_name }}
+                <a href="/">{{ $actor->name }} </a>
+                <a href="/"> {{ $actor->char_name }} </a>
+                <br><br>
              @endforeach
         </p>
 
