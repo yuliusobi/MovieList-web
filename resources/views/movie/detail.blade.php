@@ -28,6 +28,9 @@
         </p>
 
         <a href="/movie/{{ $movie->title }}" class="text-decoration-none btn btn-primary">Detail</a>
+
+        <a href="/" class="text-decoration-none btn btn-danger">Edit Movie</a>
+        <a href="/" class="text-decoration-none btn btn-danger">Delete Movie</a>
     </div>
 
     <div style="height: 1000px"></div>

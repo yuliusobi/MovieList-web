@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,10 @@ Route::post('/logout',[LoginController::class,'logout']);
 
 Route::get('/movie/{movie:title}',[HomeController::class,'show']);
 
+// route ke navbar -> movie yang isinya list movie
+Route::get('/movies',function(){
+    return view('movie.index');
+});
+
+// route buat admin aja buat add movie
+Route::resource('/admin/movie',MovieController::class)->middleware('admin');
