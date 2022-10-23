@@ -3,7 +3,7 @@
 @section('container')
     <h1 class="text-white">Halaman Create/Add Movie</h1>
 
-    <div class="col-lg-8 mb-5">
+    <div class="mb-5">
         <form action="/admin/movie" method="POST" class="mb-3" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
@@ -19,8 +19,8 @@
 
             <div class="mb-3">
                 <label for="desc" class="form-label text-white">Description</label>
-                <input type="textarea" class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc"
-                    value="{{ old('desc') }}" required autocomplete="off">
+                <textarea type="textarea" class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc"
+                    value="{{ old('desc') }}" required autocomplete="off" rows="3"></textarea>
                 @error('desc')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -32,46 +32,45 @@
                 <label for="genre_id" class="form-label text-white">Genre</label>
                 <br>
                 @foreach ($genres as $genre)
-                    <input type="checkbox" name="genres[]" value="{{ $genre->id }}"> <span class="text-white"> {{ $genre->name }} </span> <br>
+                    <input type="checkbox" name="genres[]" id="genre_id" value="{{ $genre->id }}"> <span class="text-white"> {{ $genre->name }} </span> <br>
                 @endforeach
 
-                {{-- <select name="genre_id" id="genre_id" class="form-select @error('genre_id') is-invalid @enderror">
-                    @foreach ($genres as $genre)
-                        @if (old('genre_id') == $genre->id)
-                            <option value="{{ $genre->id }}" selected>{{ $genre->name }}</option>
-                        @else
-                            <option value="{{ $genre->id }}">{{ $genre->name }}</option>
-                        @endif
-                    @endforeach
-                </select>
-                @error('genre_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror --}}
             </div>
 
 
-            {{-- <div class="mb-3">
-                <h3 class="mb-2">Actors</h3>
+            <div class="mb-3">
+                <label for="actor_list" class="form-label text-white">Actors</label>
 
-                <div>
-
-                <label for="actor" class="form-label text-white">Genre</label>
-                <select name="actor" id="actor" class="form-select @error('actor') is-invalid @enderror">
-                    @foreach ($actors as $actor)
-                        <option value="{{ $actor->id }}" selected>{{ $actor->name }}</option>
-                        <option value="{{ $actor->id }}">{{ $actor->name }}</option>
-                    @endforeach
-                </select>
-
-                <label for="char_name" class="form-label text-white">Character Name</label>
-                <input type="input" class="form-control @error('char_name') is-invalid @enderror" id="char_name" name="char_name"
-                    value="{{ old('char_name') }}" required autocomplete="off">
-
-                <button type="" class="btn btn-primary">Add More</button>
+                <div class="border border-white p-3" id="dynamicRow">
+                    {{-- row actor 1 --}}
+                    <div class="d-flex justify-content-between row m-2">
+                        {{-- pilih actor --}}
+                        <div class="col">
+                            <label for="actor" class="form-label text-white">Actor</label>
+                            <select name="actors[]" class="form-select">
+                                @foreach ($actors as $actor)
+                                    <option value="{{ $actor->id }}">{{ $actor->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        {{-- input char name --}}
+                        <div class="col">
+                            <label for="char_name" class="form-label text-white">Character Name</label>
+                            <input type="input" class="form-control" name="char_names[]"
+                                value="{{ old('char_names[]') }}" required autocomplete="off">
+                                @error('char_name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                        </div>
+                    </div>
                 </div>
-            </div> --}}
+
+                <div class="d-flex justify-content-end mt-3">
+                    <button type="button" onclick="addMore()" class="btn btn-primary">Add More</button>
+                </div>
+            </div>
 
             <div class="mb-3">
                 <label for="director" class="form-label text-white">Director</label>
@@ -125,7 +124,45 @@
         </form>
     </div>
 
+    {{-- jquery --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     <script>
+        var divRow = document.getElementById('dynamicRow');
+        function addMore(){
+            divRow.innerHTML += `<span><div class="d-flex justify-content-between row m-2">
+                {{-- pilih actor --}}
+                <div class="col">
+                    <label for="actor" class="form-label text-white">Actor</label>
+                    <select name="actors[]" class="form-select">
+                         @foreach ($actors as $actor)
+                            <option value="{{ $actor->id }}">{{ $actor->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                {{-- input char name --}}
+                <div class="col">
+                <label for="char_name" class="form-label text-white">Character Name</label>
+                <input type="input" class="form-control "  name="char_names[]"
+                    value="{{ old('char_name') }}" required autocomplete="off">
+                     @error('char_name')
+                        <div class="invalid-feedback">
+                        {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="mt-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-danger remove-input">Remove</button>
+                </div>
+
+            </div></span>`;
+        }
+
+        $(document).on('click', '.remove-input', function () {
+            $(this).parents('span').remove();
+        });
+
         function previewImage1(){
             const image = document.querySelector('#thumb_img');
             const imgPreview = document.querySelector('.img-preview1');

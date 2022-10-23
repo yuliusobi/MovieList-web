@@ -55,6 +55,8 @@ class MovieController extends Controller
             'title' => 'required|max:255',
             'desc' => 'required|min:10',
             'genres' => 'required',
+            'actors' => 'required',
+            'char_names' => 'required',
             'director' => 'required|max:255',
             'released_date' => 'required',
             'thumb_img' => 'image|file|max:5120',
@@ -69,15 +71,25 @@ class MovieController extends Controller
         if($request->file('bg_img')){
             $validatedData['bg_img'] = $request->file('bg_img')->store('bg-images');
         }
-
+        // insert data movie
         Movie::create($validatedData);
 
+        // insert data genre
         $idMov = Movie::where('title',$request->title)->value('id');
         $thisTime = Carbon::now();
 
         foreach($request->genres as $genre){
             DB::insert('insert into movie_genres (movie_id, genre_id,created_at,updated_at) values (?, ?, ?, ?)', [$idMov, $genre,$thisTime,$thisTime]);
         }
+
+        //insert data actor
+        $i = 0;
+
+        while($i < sizeof($request->actors)){
+            DB::insert('insert into movie_actors (movie_id, actor_id,char_name,created_at,updated_at) values (?,?, ?, ?, ?)', [$idMov, $request->actors[$i],$request->char_names[$i],$thisTime,$thisTime]);
+            $i++;
+        }
+
 
         return redirect('/')->with('success', 'New Movie has been added!');
     }

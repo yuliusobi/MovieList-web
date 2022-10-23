@@ -6,8 +6,22 @@
     {{-- card buat movie --}}
 
     <div class="container">
-        <img src="{{ $movie->thumb_img }}" class="img-fluid" alt="{{ $movie->title }}">
-        <img src="{{ $movie->bg_img }}" class="img-fluid" alt="{{ $movie->title }}">
+
+        @if ($movie->thumb_img)
+            <div style="max-height: 350px; overflow:hidden">
+                <img src="{{ asset('storage/' . $movie->thumb_img) }}" alt="{{ $movie->title }}" class="img-fluid">
+            </div>
+        @else
+            <img src="https://source.unsplash.com/400x350?movie" alt="{{ $movie->title }}" class="img-fluid">
+        @endif
+
+        @if ($movie->bg_img)
+            <div style="max-height: 350px; overflow:hidden">
+                <img src="{{ asset('storage/' . $movie->bg_img) }}" alt="{{ $movie->title }}" class="img-fluid">
+            </div>
+        @else
+            <img src="https://source.unsplash.com/400x350?background" alt="{{ $movie->title }}" class="img-fluid">
+        @endif
 
         <h5><a href="/" class="text-decoration-none">{{ $movie->title }}</a></h5>
 

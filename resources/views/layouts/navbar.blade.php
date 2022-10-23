@@ -12,10 +12,10 @@
                     <a class="nav-link {{ ($active === "home") ? 'active' : '' }}" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/movies">Movies</a>
+                    <a class="nav-link {{ ($active === "movies") ? 'active' : '' }}" href="/movies">Movies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Actor</a>
+                    <a class="nav-link {{ ($active === "actors") ? 'active' : '' }}" href="/actors">Actors</a>
                 </li>
                 {{-- @can('auth')
                     <li class="nav-item">

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ActorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RegisterController;
+use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,8 +33,16 @@ Route::get('/movie/{movie:title}',[HomeController::class,'show']);
 
 // route ke navbar -> movie yang isinya list movie
 Route::get('/movies',function(){
-    return view('movie.index');
+    return view('movie.index',[
+        'title' => 'Movies',
+        'active' => 'movies',
+        'movies' => Movie::all()
+    ]);
 });
 
 // route buat admin aja buat add movie
 Route::resource('/admin/movie',MovieController::class)->middleware('admin');
+
+
+// route ke page actors list
+Route::resource('/actors',ActorController::class);

@@ -15,8 +15,13 @@
             <div class="col-md-4 mb-3">
                 <div class="card">
 
-
-                <img src="{{ $movie->thumb_img }}" class="card-img-top" alt="{{ $movie->title }}">
+                @if ($movie->thumb_img)
+                    <div style="max-height: 350px; overflow:hidden">
+                        <img src="{{ asset('storage/' . $movie->thumb_img) }}" alt="{{ $movie->title }}" class="card-img-top">
+                    </div>
+                @else
+                    <img src="https://source.unsplash.com/400x350?movie" alt="{{ $movie->title }}" class="card-img-top">
+                @endif
 
                 <div class="card-body">
                     <h5><a href="/" class="text-decoration-none">{{ $movie->title }}</a></h5>
