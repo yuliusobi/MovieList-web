@@ -172,7 +172,7 @@ class MovieController extends Controller
             if($movie->bg_img){
                 Storage::delete($movie->bg_img);
             }
-            $validatedData['bg_img'] = $request->file('bg_img')->store('movie-images');
+            $validatedData['bg_img'] = $request->file('bg_img')->store('bg-images');
         }
 
         // update data movie
