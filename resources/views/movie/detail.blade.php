@@ -3,10 +3,19 @@
 @section('container')
     <h1 class="text-white">Halaman Movie Detail</h1>
 
+
+    <a href="/admin/movie/{{ $movie->id }}/edit" class="text-decoration-none btn btn-danger">Edit Movie</a>
+
+    <form action="/admin/movie/{{ $movie->id }}" method="POST" class="d-inline">
+        @method('delete')
+        @csrf
+        <button class="badge bg-danger border-0" style="width: 30px;height:30px" onclick="return confirm('Are you sure ?')">
+            <i class="bi bi-trash"></i></button>
+    </form>
+
     {{-- card buat movie --}}
-
     <div class="container">
-
+        <h4 class="text-white">Thumb image</h4>
         @if ($movie->thumb_img)
             <div style="max-height: 350px; overflow:hidden">
                 <img src="{{ asset('storage/' . $movie->thumb_img) }}" alt="{{ $movie->title }}" class="img-fluid">
@@ -15,6 +24,7 @@
             <img src="https://source.unsplash.com/400x350?movie" alt="{{ $movie->title }}" class="img-fluid">
         @endif
 
+        <h4 class="text-white">Background image</h4>
         @if ($movie->bg_img)
             <div style="max-height: 350px; overflow:hidden">
                 <img src="{{ asset('storage/' . $movie->bg_img) }}" alt="{{ $movie->title }}" class="img-fluid">
@@ -25,13 +35,16 @@
 
         <h5><a href="/" class="text-decoration-none">{{ $movie->title }}</a></h5>
 
-        <p class="card-text">{{ $movie->released_date }}</p>
+        <p class="card-text text-white">{{ $movie->released_date }}</p>
+
+        <h4 class="text-white">Genre Movie</h4>
         <p class="card-text text-white">
             @foreach ($genres as $genre)
             {{ $genre->name }} |
              @endforeach
         </p>
 
+        <h4 class="text-white">Actors</h4>
         <p class="card-text text-white">
             @foreach ($actors as $actor)
                 <img src="https://source.unsplash.com/100x200?person" class="img-fluid" alt="{{ $actor->name  }}">
@@ -40,11 +53,6 @@
                 <br><br>
              @endforeach
         </p>
-
-        <a href="/movie/{{ $movie->title }}" class="text-decoration-none btn btn-primary">Detail</a>
-
-        <a href="/" class="text-decoration-none btn btn-danger">Edit Movie</a>
-        <a href="/" class="text-decoration-none btn btn-danger">Delete Movie</a>
     </div>
 
     <div style="height: 1000px"></div>

@@ -40,7 +40,7 @@ Route::get('/movies',function(){
     ]);
 });
 
-// route buat admin aja buat add movie
+// route buat admin aja buat add,edit,delete movie
 Route::resource('/admin/movie',MovieController::class)->middleware('admin');
 
 

@@ -17,11 +17,11 @@
                 <li class="nav-item">
                     <a class="nav-link {{ ($active === "actors") ? 'active' : '' }}" href="/actors">Actors</a>
                 </li>
-                @can('auth')
+                @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="">My Watchlist</a>
+                        <a class="nav-link" href="#">My Watchlist</a>
                     </li>
-                @endcan
+                @endauth
             </ul>
 
         </div>
@@ -32,7 +32,7 @@
             {{--  kalo udah login tampilin dropdown --}}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="/img/obi.jpg" alt="Foto-profile" class="rounded-circle" style="width: 50px; height: 50px">
+                  <img src="https://source.unsplash.com/50x50?face" alt="Foto-profile" class="rounded-circle" style="width: 50px; height: 50px">
                   {{-- <i class="bi bi-person-circle"> --}}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

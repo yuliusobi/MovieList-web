@@ -8,6 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+
     {{-- card buat movie --}}
     <div class="container">
         <div class="row">
@@ -29,10 +30,6 @@
                     <p class="card-text">{{ $movie->released_date }}</p>
 
                     <a href="/movie/{{ $movie->title }}" class="text-decoration-none btn btn-primary">Detail</a>
-
-                    @can('admin')
-                        <a href="/admin/movie" class="text-decoration-none btn btn-danger">Add Movie</a>
-                    @endcan
 
                 </div>
                 </div>
