@@ -16,7 +16,7 @@
     {{-- My Style --}}
      <link rel="stylesheet" href="/css/style.css">
 
-    <title>Movie List |  {{ $title }}</title>
+    <title>{{ $title }} | Movie List</title>
 </head>
 
 <body>

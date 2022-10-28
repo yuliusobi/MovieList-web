@@ -17,11 +17,11 @@
                 <li class="nav-item">
                     <a class="nav-link {{ ($active === "actors") ? 'active' : '' }}" href="/actors">Actors</a>
                 </li>
-                {{-- @can('auth')
+                @can('auth')
                     <li class="nav-item">
                         <a class="nav-link" href="">My Watchlist</a>
                     </li>
-                @endcan --}}
+                @endcan
             </ul>
 
         </div>
