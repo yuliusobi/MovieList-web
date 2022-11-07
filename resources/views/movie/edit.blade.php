@@ -125,10 +125,10 @@
                 <label for="thumb_img" class="form-label text-white">Thumb Image</label>
 
                 @if ($movie->thumb_img)
-                    <img src= "{{ asset('storage/' . $movie->thumb_img) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
-                @else
-                    <img class="img-preview img-fluid mb-3 col-sm-5">
+                    <img src= "{{ asset('storage/' . $movie->thumb_img) }}" class="img-preview1 img-fluid mb-3 col-sm-5" style="display: block;">
                 @endif
+
+                <img class="img-preview2 img-fluid mb-3 col-sm-5">
 
                 <input id="thumb_img" class="form-control @error('thumb_img') is-invalid @enderror" type="file" name="thumb_img" onchange="previewImage1()">
 
@@ -143,10 +143,10 @@
                 <label for="bg_img" class="form-label text-white">Background Image</label>
 
                 @if ($movie->bg_img)
-                    <img src= "{{ asset('storage/' . $movie->bg_img) }}" class="img-preview1 img-fluid mb-3 col-sm-5" style="display: block;">
+                    <img src= "{{ asset('storage/' . $movie->bg_img) }}" class="img-preview3 img-fluid mb-3 col-sm-5" style="display: block;">
                 @endif
 
-                <img class="img-preview2 img-fluid mb-3 col-sm-5">
+                <img class="img-preview4 img-fluid mb-3 col-sm-5">
 
                 <input id="bg_img" class="form-control @error('bg_img') is-invalid @enderror" type="file" name="bg_img" onchange="previewImage2()">
 
@@ -204,20 +204,6 @@
 
         function previewImage1(){
             const image = document.querySelector('#thumb_img');
-            const imgPreview = document.querySelector('.img-preview1');
-
-            imgPreview.style.display = 'block';
-
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
-
-            oFReader.onload = function(oFREvent){
-                imgPreview.src = oFREvent.target.result;
-            }
-        }
-
-        function previewImage2(){
-            const image = document.querySelector('#bg_img');
             const imgPreview1 = document.querySelector('.img-preview1');
             const imgPreview2 = document.querySelector('.img-preview2');
 
@@ -229,6 +215,22 @@
 
             oFReader.onload = function(oFREvent){
                 imgPreview2.src = oFREvent.target.result;
+            }
+        }
+
+        function previewImage2(){
+            const image = document.querySelector('#bg_img');
+            const imgPreview3 = document.querySelector('.img-preview3');
+            const imgPreview4 = document.querySelector('.img-preview4');
+
+            imgPreview3.style.display = 'none';
+            imgPreview4.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent){
+                imgPreview4.src = oFREvent.target.result;
             }
         }
 

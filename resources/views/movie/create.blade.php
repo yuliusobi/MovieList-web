@@ -48,6 +48,7 @@
                         <div class="col">
                             <label for="actor" class="form-label text-white">Actor</label>
                             <select name="actors[]" class="form-select">
+                                <option>-------Open This Select Menu----------</option>
                                 @foreach ($actors as $actor)
                                     <option value="{{ $actor->id }}">{{ $actor->name }}</option>
                                 @endforeach

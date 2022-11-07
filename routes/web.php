@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RegisterController;
+use App\Models\Actor;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +30,7 @@ Route::get('/login',[LoginController::class,'index'])->name('login')->middleware
 Route::post('/login',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
 
-Route::get('/movie/{movie:title}',[HomeController::class,'show']);
+Route::get('/movie/{movie:title}',[HomeController::class,'showMovie']);
 
 // route ke navbar -> movie yang isinya list movie
 Route::get('/movies',function(){
@@ -43,6 +44,15 @@ Route::get('/movies',function(){
 // route buat admin aja buat add,edit,delete movie
 Route::resource('/admin/movie',MovieController::class)->middleware('admin');
 
-
 // route ke page actors list
-Route::resource('/actors',ActorController::class);
+Route::get('/actors',function(){
+    return view('actor.index', [
+        'title' => 'Actors',
+        'active' => 'actors',
+        'actors' => Actor::all()
+    ]);
+});
+
+// Route::get('/actors/{actor:title}',[HomeController::class,'showActor']);
+
+Route::resource('/detail/actors',ActorController::class)->middleware('auth');

@@ -20,7 +20,7 @@ class HomeController extends Controller
     }
 
     // controller yang terhubung ke page detail movie
-    public function show(Movie $movie){
+    public function showMovie(Movie $movie){
 
         $dataGenre= DB::table('movie_genres')
                 ->join('movies','movies.id','=','movie_genres.movie_id')
