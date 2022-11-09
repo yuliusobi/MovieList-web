@@ -36,11 +36,16 @@
             {{--  kalo udah login tampilin dropdown --}}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="https://source.unsplash.com/50x50?face" alt="Foto-profile" class="rounded-circle" style="width: 50px; height: 50px">
+                    @if (auth()->user()->profile_img)
+                        <img src="{{ asset('storage/' . auth()->user()->profile_img) }}" alt="{{ auth()->user()->username }}" width="50px" height="50px" class="rounded-circle">
+                    @else
+                        <img src="https://source.unsplash.com/50x50?face" alt="Foto-profile" class="rounded-circle" style="width: 50px; height: 50px">
+                    @endif
+
                   {{-- <i class="bi bi-person-circle"> --}}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/"><i class="bi bi-person-circle"></i> Profile</a></li>
+                  <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="bi bi-person-circle"></i> Profile</a></li>
 
                   <li><hr class="dropdown-divider"></li>
 

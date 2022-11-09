@@ -4,7 +4,9 @@ use App\Http\Controllers\ActorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use App\Models\Actor;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
@@ -52,7 +54,9 @@ Route::get('/actors',function(){
         'actors' => Actor::all()
     ]);
 });
-
-// Route::get('/actors/{actor:title}',[HomeController::class,'showActor']);
-
 Route::resource('/detail/actors',ActorController::class)->middleware('auth');
+
+//profile
+// Route::resource('/profile',UserController::class)->middleware('auth');
+Route::get('/profile',[ProfileController::class,'edit'])->name('profile.edit');
+Route::patch('/profile',[ProfileController::class,'update'])->name('profile.update');
