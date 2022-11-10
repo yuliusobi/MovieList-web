@@ -54,7 +54,8 @@ Route::get('/actors',function(){
         'actors' => Actor::all()
     ]);
 });
-Route::resource('/detail/actors',ActorController::class)->middleware('auth');
+Route::get('/detail/actors/{actor:name}',[ActorController::class,'show']);
+Route::resource('/detail/actors',ActorController::class)->except('show')->middleware('auth');
 
 //profile
 // Route::resource('/profile',UserController::class)->middleware('auth');

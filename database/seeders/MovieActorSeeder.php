@@ -16,27 +16,33 @@ class MovieActorSeeder extends Seeder
     public function run()
     {
         MovieActor::create([
-            'actor_id' => 1,
             'movie_id' => 1,
-            'char_name' => 'dobby'
+            'actor_id' => 1,
+            'char_name' => 'Diana'
         ]);
 
         MovieActor::create([
-            'actor_id' => 2,
-            'movie_id' => 1,
-            'char_name' => 'rawwfe'
-        ]);
-
-        MovieActor::create([
-            'actor_id' => 1,
             'movie_id' => 2,
-            'char_name' => 'loving'
+            'actor_id' => 2,
+            'char_name' => 'Jack Sparrow'
         ]);
 
         MovieActor::create([
-            'actor_id' => 2,
+            'movie_id' => 2,
+            'actor_id' => 4,
+            'char_name' => 'Elizabeth Swann'
+        ]);
+
+        MovieActor::create([
             'movie_id' => 3,
-            'char_name' => 'Jacky'
+            'actor_id' => 3,
+            'char_name' => 'Jack Dawson'
+        ]);
+
+        MovieActor::create([
+            'movie_id' => 4,
+            'actor_id' => 1,
+            'char_name' => 'The Bishop'
         ]);
     }
 }

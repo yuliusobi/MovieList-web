@@ -39,7 +39,8 @@
                     @if (auth()->user()->profile_img)
                         <img src="{{ asset('storage/' . auth()->user()->profile_img) }}" alt="{{ auth()->user()->username }}" width="50px" height="50px" class="rounded-circle">
                     @else
-                        <img src="https://source.unsplash.com/50x50?face" alt="Foto-profile" class="rounded-circle" style="width: 50px; height: 50px">
+                        <i class="bi bi-person-circle" style="font-size: 2.3rem; color: white;"></i>
+                        {{-- <img src="https://source.unsplash.com/50x50?face" alt="Foto-profile" class="rounded-circle" style="width: 50px; height: 50px"> --}}
                     @endif
 
                   {{-- <i class="bi bi-person-circle"> --}}

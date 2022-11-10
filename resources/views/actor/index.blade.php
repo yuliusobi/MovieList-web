@@ -37,7 +37,7 @@
                             ->where(['actor_id' => $actor->id])
                             ->pluck('movies.title')->implode(' | '); }}</h5>
 
-                        <a href="/detail/actors/{{ $actor->id }}" class="text-decoration-none btn btn-primary">Detail</a>
+                        <a href="/detail/actors/{{ $actor->name }}" class="text-decoration-none btn btn-primary">Detail</a>
 
                     </div>
                     </div>

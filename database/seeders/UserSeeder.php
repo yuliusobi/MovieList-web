@@ -23,15 +23,22 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'username' => 'iniuser2',
-            'email' => 'user2@gmail.com',
+            'username' => 'suma',
+            'email' => 'suma@gmail.com',
+            'password' => bcrypt('password'),
+            'is_admin' => true,
+        ]);
+
+        User::create([
+            'username' => 'user3',
+            'email' => 'user3@gmail.com',
             'password' => bcrypt('password'),
             'is_admin' => false,
         ]);
 
         User::create([
-            'username' => 'iniuser3',
-            'email' => 'iniuser3@gmail.com',
+            'username' => 'user4',
+            'email' => 'user4@gmail.com',
             'password' => bcrypt('password'),
             'is_admin' => false,
         ]);

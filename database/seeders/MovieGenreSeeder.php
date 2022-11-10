@@ -16,28 +16,43 @@ class MovieGenreSeeder extends Seeder
     public function run()
     {
         MovieGenre::create([
-            'genre_id' => 1,
-            'movie_id' => 1
+            'movie_id' => 1,
+            'genre_id' => 1
         ]);
 
         MovieGenre::create([
-            'genre_id' => 2,
-            'movie_id' => 1
+            'movie_id' => 1,
+            'genre_id' => 6
         ]);
 
         MovieGenre::create([
-            'genre_id' => 1,
-            'movie_id' => 2
+            'movie_id' => 2,
+            'genre_id' => 1
         ]);
 
         MovieGenre::create([
-            'genre_id' => 3,
-            'movie_id' => 3
+            'movie_id' => 2,
+            'genre_id' => 6
         ]);
 
         MovieGenre::create([
-            'genre_id' => 2,
-            'movie_id' => 3
+            'movie_id' => 3,
+            'genre_id' => 2
+        ]);
+
+        MovieGenre::create([
+            'movie_id' => 3,
+            'genre_id' => 5
+        ]);
+
+        MovieGenre::create([
+            'movie_id' => 4,
+            'genre_id' => 1
+        ]);
+
+        MovieGenre::create([
+            'movie_id' => 4,
+            'genre_id' => 4
         ]);
     }
 }
