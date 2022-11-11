@@ -7,6 +7,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WatchlistController;
 use App\Models\Actor;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
@@ -55,9 +56,12 @@ Route::get('/actors',function(){
     ]);
 });
 Route::get('/detail/actors/{actor:name}',[ActorController::class,'show']);
-Route::resource('/detail/actors',ActorController::class)->except('show')->middleware('auth');
+Route::resource('/detail/actors',ActorController::class)->except('show')->middleware('admin');
 
 //profile
 // Route::resource('/profile',UserController::class)->middleware('auth');
-Route::get('/profile',[ProfileController::class,'edit'])->name('profile.edit');
-Route::patch('/profile',[ProfileController::class,'update'])->name('profile.update');
+Route::get('/profile',[ProfileController::class,'edit'])->name('profile.edit')->middleware('auth');
+Route::patch('/profile',[ProfileController::class,'update'])->name('profile.update')->middleware('auth');
+
+// watchlist
+Route::resource('/watchlist',WatchlistController::class)->middleware('auth');

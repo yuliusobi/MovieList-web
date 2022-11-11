@@ -20,7 +20,7 @@
                 @auth
                     @cannot('admin')
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Watchlist</a>
+                        <a class="nav-link {{ ($active === "watchlist") ? 'active' : '' }}" href="/watchlist">My Watchlist</a>
                     </li>
                     @endcannot
                 @endauth
