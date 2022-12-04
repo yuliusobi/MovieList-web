@@ -21,4 +21,8 @@ class Movie extends Model
         return $this->hasMany(MovieGenre::class);
     }
 
+    public function Watchlist(){
+        return $this->hasMany(Watchlist::class);
+    }
+
 }

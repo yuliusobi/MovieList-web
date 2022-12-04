@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
 use App\Models\Watchlist;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,15 +17,37 @@ class WatchlistController extends Controller
      */
     public function index()
     {
-        $dataMovie= DB::table('watchlists')
-        ->join('movies','movies.id','=','watchlists.movie_id')
-        ->where(['user_id' => auth()->user()->id])
-        ->get(['watchlists.id','movies.thumb_img','movies.title','watchlists.status']);
+        if(request('status') == 'All'){
+            $dataMovie = Watchlist::latest()->with(['Movie','User'])->where(['user_id' => auth()->user()->id])->get();
+        }else{
+            $dataMovie = Watchlist::latest()->filter(request(['search','status']))
+             ->with(['Movie','User'])->where(['user_id' => auth()->user()->id])->get();
+        }
 
-        return view('watchlist.index', [
+        return view('watchlist.index',[
             'lists' => $dataMovie,
             'title' => 'My Watchlist',
             'active' => 'watchlist',
+            'status' => request('status')
+        ]);
+    }
+
+    public function watchlistSort(Request $request){
+        $status = $request->status;
+
+        if($status == 'All'){
+            $dataMovie = Watchlist::latest()->filter(request(['search']))
+            ->with(['Movie','User'])->where(['user_id' => auth()->user()->id])->get();
+        }else{
+            $dataMovie = Watchlist::latest()->with(['Movie','User'])
+             ->where(['user_id' => auth()->user()->id,'status' => $status])->get();
+        }
+
+        return view('watchlist.index',[
+            'lists' => $dataMovie,
+            'title' => 'My Watchlist',
+            'active' => 'watchlist',
+            'status' => $status
         ]);
     }
 
@@ -91,7 +114,13 @@ class WatchlistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $status = $request->validate([
+            'status' => 'required'
+        ]);
+
+        Watchlist::where('id',$id)->update($status);
+
+        return redirect('/watchlist')->with('success', 'Status has been Updated!');
     }
 
     /**

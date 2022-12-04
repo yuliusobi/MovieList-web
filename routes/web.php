@@ -64,4 +64,6 @@ Route::get('/profile',[ProfileController::class,'edit'])->name('profile.edit')->
 Route::patch('/profile',[ProfileController::class,'update'])->name('profile.update')->middleware('auth');
 
 // watchlist
-Route::resource('/watchlist',WatchlistController::class)->middleware('auth');
+Route::resource('/watchlist',WatchlistController::class)->except('sorting')->middleware('auth');
+
+Route::post('/watchlist',[WatchlistController::class,'watchlistSort'])->middleware('auth')->name('watchlistSort');
