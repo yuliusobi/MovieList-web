@@ -17,7 +17,7 @@
             <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About Us</a></li>
         </ul>
 
-      <p class="text-center text-muted">Copyright © 2021 MovieList All Rights Reserved</p>
+      <p class="text-center text-muted" style="padding: 0;">Copyright © 2021 MovieList All Rights Reserved</p>
 
     </footer>
   </div>

@@ -37,10 +37,13 @@ Route::get('/movie/{movie:title}',[HomeController::class,'showMovie']);
 
 // route ke navbar -> movie yang isinya list movie
 Route::get('/movies',function(){
+
+    $movies = Movie::where('title','like','%' . request('search') .'%')->orderBy('title','asc')->paginate(2)->withQueryString();
+
     return view('movie.index',[
         'title' => 'Movies',
         'active' => 'movies',
-        'movies' => Movie::all()
+        'movies' => $movies
     ]);
 });
 
@@ -49,12 +52,16 @@ Route::resource('/admin/movie',MovieController::class)->middleware('admin');
 
 // route ke page actors list
 Route::get('/actors',function(){
+    $actors = Actor::where('name', 'like', '%' . request('search') . '%')->orderBy('name','asc')
+    ->paginate(3)->appends(["search"=>request('search')]);
+
     return view('actor.index', [
         'title' => 'Actors',
         'active' => 'actors',
-        'actors' => Actor::all()
+        'actors' => $actors
     ]);
 });
+
 Route::get('/detail/actors/{actor:name}',[ActorController::class,'show']);
 Route::resource('/detail/actors',ActorController::class)->except('show')->middleware('admin');
 

@@ -63,13 +63,13 @@
                 {{--  kalo blm login tampilin tombol login v --}}
                 <li class="nav-item">
                     <a href="/register" class="nav-link">
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-danger">
                         <i class="bi bi-person-plus"></i> Register</button>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/login" class="nav-link">
-                    <button type="button" class="btn btn-outline-primary">
+                    <button type="button" class="btn btn-outline-danger">
                         <i class="bi bi-box-arrow-in-right"></i> Login</button>
                     </a>
                 </li>

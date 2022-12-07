@@ -2,21 +2,36 @@
 
 @section('container')
     <h1 class="text-white">Halaman List Movies</h1>
-            @if(session()->has('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
+        @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                 {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+         @endif
 
-        @can('admin')
-            <a href="/admin/movie" class="text-decoration-none btn btn-danger my-4 mx-2">Add Movie</a>
-        @endcan
+        <div class="d-flex justify-content-end">
+            {{-- searching --}}
+            <div class="my-auto mx-2">
+                <form action="/movies">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search Movie Name.." name="search" value="{{ request('search') }}">
+                    <button class="btn btn-danger" type="submit">Search</button>
+                  </div>
+                </form>
+            </div>
+            @can('admin')
+            <div class="my-auto">
+                <a href="/admin/movie" class="text-decoration-none btn btn-danger my-4 mx-2">Add Movie</a>
+            </div>
+            @endcan
+
+        </div>
 
         {{-- card buat movie --}}
         <div class="container">
             <div class="row">
-              @foreach ($movies as $movie)
+            @if ($movies->count())
+                @foreach ($movies as $movie)
                 <div class="col-md-4 mb-3">
                     <div class="card">
 
@@ -39,8 +54,13 @@
                     </div>
                 </div>
 
-              @endforeach
+                @endforeach
+            @else
+                <p class="text-center fs-4 text-white">No movie found.</p>
+            @endif
             </div>
+
+            {{ $movies->links() }}
         </div>
 
 @endsection
