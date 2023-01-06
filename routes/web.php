@@ -38,7 +38,7 @@ Route::get('/movie/{movie:title}',[HomeController::class,'showMovie']);
 // route ke navbar -> movie yang isinya list movie
 Route::get('/movies',function(){
 
-    $movies = Movie::where('title','like','%' . request('search') .'%')->orderBy('title','asc')->paginate(2)->withQueryString();
+    $movies = Movie::where('title','like','%' . request('search') .'%')->orderBy('title','asc')->paginate(5)->withQueryString();
 
     return view('movie.index',[
         'title' => 'Movies',
@@ -53,7 +53,7 @@ Route::resource('/admin/movie',MovieController::class)->middleware('admin');
 // route ke page actors list
 Route::get('/actors',function(){
     $actors = Actor::where('name', 'like', '%' . request('search') . '%')->orderBy('name','asc')
-    ->paginate(3)->appends(["search"=>request('search')]);
+    ->paginate(5)->appends(["search"=>request('search')]);
 
     return view('actor.index', [
         'title' => 'Actors',
@@ -71,6 +71,4 @@ Route::get('/profile',[ProfileController::class,'edit'])->name('profile.edit')->
 Route::patch('/profile',[ProfileController::class,'update'])->name('profile.update')->middleware('auth');
 
 // watchlist
-Route::resource('/watchlist',WatchlistController::class)->except('sorting')->middleware('auth');
-
-Route::post('/watchlist',[WatchlistController::class,'watchlistSort'])->middleware('auth')->name('watchlistSort');
+Route::resource('/watchlist',WatchlistController::class)->middleware('auth');

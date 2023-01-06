@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\IsAdmin;
 use App\Models\Genre;
 use App\Models\Movie;
 use App\Models\MovieGenre;
 use App\Models\Watchlist;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -18,15 +20,7 @@ class HomeController extends Controller
 
         $filtered = Movie::whereIn('id', $idCollection)->get();
 
-        // // searching
-        // $movies = Movie::where('title','like','%' . request('search') .'%')->orderBy('title','asc')->paginate(30);
-
-        // // sorted
-        // if (request('sortby') == 'latest') {
-        //     $movies =
-        // }
-
-        $movies = Movie::latest()->filter(request(['search','sortby','genre']))->paginate(30)->withQueryString();
+        $movies = Movie::latest()->filter(request(['search','sortby','genre']))->paginate();
 
         if(request('genre')){
             $movies= DB::table('movie_genres')
@@ -36,13 +30,31 @@ class HomeController extends Controller
             ->get();
         }
 
-        return view('index',[
-            'title' => 'Home',
-            'active' => 'home',
-            "movies" => $movies,
-            "moviesPopular" => $filtered,
-            "genres" => Genre::all()
-        ]);
+        if(Auth::check() && auth()->user()->is_admin == 0){
+            $dataMovie = Watchlist::latest()->with(['Movie','User'])->where(['user_id' => auth()->user()->id])->get();
+
+            return view('index',[
+                'title' => 'Home',
+                'active' => 'home',
+                "movies" => $movies,
+                "moviesPopular" => $filtered,
+                "genres" => Genre::all(),
+                "watchlists" => $dataMovie,
+                "flag" => 1
+            ]);
+        }else{
+            return view('index',[
+                'title' => 'Home',
+                'active' => 'home',
+                "movies" => $movies,
+                "moviesPopular" => $filtered,
+                "genres" => Genre::all(),
+                "flag" => 1
+            ]);
+
+        }
+
+
     }
 
     // controller yang terhubung ke page detail movie

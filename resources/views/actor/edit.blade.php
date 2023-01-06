@@ -22,8 +22,14 @@
                 <label for="gender" class="form-label text-white">Gender</label>
                 <select name="gender" id="gender" class="form-select @error('gender') is-invalid @enderror">
                     <option>-------Open This Select Menu----------</option>
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
+                    @if ($actor->gender == 'Female')
+                        <option value="Female" selected>Female</option>
+                        <option value="Male">Male</option>
+                    @else
+                        <option value="Female" >Female</option>
+                        <option value="Male" selected>Male</option>
+                    @endif
+
                 </select>
                 @error('gender')
                     <div class="invalid-feedback">
@@ -36,7 +42,7 @@
             <div class="mb-3">
                 <label for="bio" class="form-label text-white">Biography</label>
                 <textarea type="textarea" class="form-control @error('bio') is-invalid @enderror" id="bio" name="bio"
-                    value="{{ old('bio',$actor->bio) }}" required autocomplete="off" rows="4"></textarea>
+                    value="{{ old('bio') }}" required autocomplete="off" rows="4">{{ $actor->bio }}</textarea>
                 @error('bio')
                     <div class="invalid-feedback">
                         {{ $message }}

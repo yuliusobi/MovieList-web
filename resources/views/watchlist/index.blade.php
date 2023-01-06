@@ -15,19 +15,6 @@
     {{-- sorting + searching --}}
     <div class="d-flex justify-content-between">
         <div class="col-2 d-flex">
-            {{-- <label for="sorting"> <i class="bi bi-funnel-fill text-white my-auto me-3" style="font-size: 2rem;"></i>
-            Sort</label>
-            {{-- <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Sort by watchlist
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/watchlist?status=all">All</a></li>
-                  <li><a class="dropdown-item" href="/watchlist?status=planned">Planned</a></li>
-                  <li><a class="dropdown-item" href="/watchlist?status=watching">Watching</a></li>
-                  <li><a class="dropdown-item" href="/watchlist?status=finished">Finished</a></li>
-                </ul>
-            </div> --}}
 
             <label for="sorting"> <i class="bi bi-funnel-fill text-white my-auto me-3" style="font-size: 2rem;"></i></label>
             <form action="/watchlist" method="get" class="my-auto">
@@ -116,6 +103,35 @@
                             </form>
                         </td>
                     </tr>
+
+                    <div class="modal" tabindex="-1" id="changeStatus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Change Status</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="/watchlist/{{ $list->id }}" method="POST">
+                                @method('put')
+                                @csrf
+                                <div class="modal-body">
+                                    <select name="status" class="form-select">
+                                        <option value="default">-------Open This Select Menu----------</option>
+                                        <option value="Planned">Planned</option>
+                                        <option value="Watching">Watching</option>
+                                        <option value="Finished">Finished</option>
+                                    </select>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                          </div>
+                        </div>
+                    </div>
+
                     @endforeach
 
                     @else
@@ -132,33 +148,6 @@
             </table>
         </div>
 
-        <div class="modal" tabindex="-1" id="changeStatus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Change Status</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="" method="POST">
-                    @method('put')
-                    @csrf
-                    <div class="modal-body">
-                        <select name="status" class="form-select">
-                            <option value="default">-------Open This Select Menu----------</option>
-                            <option value="Planned">Planned</option>
-                            <option value="Watching">Watching</option>
-                            <option value="Finished">Finished</option>
-                        </select>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-              </div>
-            </div>
-        </div>
 
     {{-- jquery --}}
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

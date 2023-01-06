@@ -28,7 +28,7 @@ class ActorSeeder extends Seeder
 
         Actor::create([
             'name' => 'Johnny Deep',
-            'bio' => "John Christopher 'Johnny' Depp II was born on June...",
+            'bio' => "John Christopher 'Johnny' Depp II was born on June 9, 1963 in Owensboro, Kentucky, to Betty Sue Palmer (née Wells), a waitress, and John Christopher Depp, a civil engineer. He was raised in Florida. He dropped out of school when he was 15, and fronted a series of music-garage bands, including one named 'The Kids'. When he married Lori A. Depp, he took a job as a ballpoint-pen salesman to support himself and his wife. A visit to Los Angeles, California, with his wife, however, happened to be a blessing in disguise, when he met up with actor Nicolas Cage, who advised him to turn to acting, which culminated in Depp's film debut in the low-budget horror film, A Nightmare on Elm Street (1984), where he played a teenager who falls prey to dream-stalking demon Freddy Krueger.",
             'gender' => 'Male',
             'dob' => Carbon::parse('1963-06-09'),
             'place_of_birth' => 'USA',

@@ -32,24 +32,24 @@ class WatchlistController extends Controller
         ]);
     }
 
-    public function watchlistSort(Request $request){
-        $status = $request->status;
+    // public function watchlistSort(Request $request){
+    //     $status = $request->status;
 
-        if($status == 'All'){
-            $dataMovie = Watchlist::latest()->filter(request(['search']))
-            ->with(['Movie','User'])->where(['user_id' => auth()->user()->id])->get();
-        }else{
-            $dataMovie = Watchlist::latest()->with(['Movie','User'])
-             ->where(['user_id' => auth()->user()->id,'status' => $status])->get();
-        }
+    //     if($status == 'All'){
+    //         $dataMovie = Watchlist::latest()->filter(request(['search']))
+    //         ->with(['Movie','User'])->where(['user_id' => auth()->user()->id])->get();
+    //     }else{
+    //         $dataMovie = Watchlist::latest()->with(['Movie','User'])
+    //          ->where(['user_id' => auth()->user()->id,'status' => $status])->get();
+    //     }
 
-        return view('watchlist.index',[
-            'lists' => $dataMovie,
-            'title' => 'My Watchlist',
-            'active' => 'watchlist',
-            'status' => $status
-        ]);
-    }
+    //     return view('watchlist.index',[
+    //         'lists' => $dataMovie,
+    //         'title' => 'My Watchlist',
+    //         'active' => 'watchlist',
+    //         'status' => $status
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.

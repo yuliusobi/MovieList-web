@@ -21,16 +21,10 @@ class LoginController extends Controller
             'email' => 'required|email:dns',
             'password' => 'required'
         ]);
+        $remember = $request->remember ? true : false;
 
         // KALO PASSWORD & EMAILNYA BENER
-        if(Auth::attempt($credentials)) {
-
-            // $remember = ($request->remember) ? true : false;
-
-            // if($remember == true){
-            //     // Auth::login(Auth::user()->id,true);
-            //     return redirect()->intended('/');
-            // }
+        if(Auth::attempt($credentials,$remember)) {
 
             $request->session()->regenerate();
             return redirect()->intended('/');
